@@ -7,7 +7,7 @@ fs = require 'fs'
 
 describe "Vintager", ->
 
-  describe.skip "(filter:String)", ->
+  describe.skip "(filter:String, source:ReadableStream)", ->
 
     it "should return stream.Readable", ->
       expect(true).to.not.be.ok
