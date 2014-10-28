@@ -1,47 +1,36 @@
 # Collection of kind of common image filters used by
 # a number of popular services.
 
-gm = require 'gm'
+_filters = require "./config"
 
-###*
- * Basic filter container.
-###
+# Basic filter container.
 class Filter
 
-  ###*
-   * @param  {String} @name Filter name
-   * @return {Filter}
-  ###
   constructor: (@name) ->
     @debug = require("debug")("#{@name}_filter")
 
-###*
- * Collection of filters that have been extended.
-###
+  stream: ->
+    @debug("Unimplemented stream() method")
+    throw new Error('Unimplemented stream() method')
+
+# Collection of filters that have been extended.
 class FilterCollection
 
-  ###*
-   * @return {FilterCollection}
-  ###
   constructor: ->
     @filters = []
-    for filter in [0...10] by 1
-      @filters.push new Filter "Filter#{filter}"
+    for name, stream of _filters
+      filter = new Filter "#{name.toLowerCase()}"
+      filter.stream = stream
+      @filters.push filter
 
-  ###*
-   * Gets names of all filters.
-   * @return {Array} Filter names
-  ###
   names: ->
     (filter.name for filter in @filters)
 
-  ###*
-   * Checks to see if a filter exists by a given
-   *   name.
-   * @param  {String}  filter  Given filter name
-   * @return {Boolean}         If the filter exists
-  ###
   hasFilter: (filter) ->
     filter in (f.name for f in @filters)
 
+  stream: (source, filter) ->
+    (item for item in @filters when item.name is filter)[0].stream(source)
+
+FilterCollection.Filter = Filter
 module.exports = FilterCollection

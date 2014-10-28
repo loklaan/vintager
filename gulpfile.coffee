@@ -2,7 +2,6 @@ gulp = require "gulp"
 gutil = require "gulp-util"
 coffee = require "gulp-coffee"
 coffeelint = require "gulp-coffeelint"
-require "coffee-script/register"
 mocha = require "gulp-mocha"
 
 gulp.task "lint", ->
@@ -30,7 +29,7 @@ gulp.task "test", ["lint", "build"], ->
       .pipe(mocha({reporter: "spec"}))
 
 gulp.task "test-brk", ["lint", "build"], ->
-  gulp.src("./tests/*.test.coffee", {read: false})
-      .pipe(mocha({reporter: "spec", "debug-break": true}))
+  gulp.src "./tests/*.test.coffee", read: false
+    .pipe mocha reporter: "spec"
 
 gulp.task "default", ["lint"]
