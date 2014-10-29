@@ -1,6 +1,6 @@
 {
   "name": "vintager-stream",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Stream images through vintage filters. Preconfigured filters and child process spawning.",
   "main": "index.js",
   "scripts": {
