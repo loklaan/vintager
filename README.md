@@ -6,14 +6,35 @@ Filter images through preconfigured GraphicsMagick settings. This is really a wr
 
 You're **required** to download and install GraphicsMagick.
 
-Ubuntu and Fedora:
+ie. Ubuntu and Fedora:
 ```shell
 $ sudo apt-get install GraphicsMagick
 $ sudo yum install GraphicsMagick
 ```
 
-<!-- TODO: publish to npm -->
+Install project dependencies:
+```shell
+$ npm install
+```
 
 ## Usage
 
-<!-- TODO -->
+Configured filters:
+* `mythical`
+* `wurst`
+* `fathom`
+* `granadela`
+
+Example:
+```javascript
+var fs = require('fs'),
+    vintager = require('vintager-stream')
+
+var imageUrl = 'http://some.url/path.jpg',
+    imageReadstream = fs.createReadStream('./localImage.jpg'),
+    urlWriteStream = fs.createWriteStream('.localVintage-1.jpg'),
+    imageWriteStream = fs.createWriteStream('.localVintage-2.jpg')
+
+vintager.stream('mythical', imageUrl).pipe(urlWriteStream)
+vintager.stream('mythical', imageReadstream).pipe(imageWriteStream)
+```

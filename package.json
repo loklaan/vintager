@@ -1,7 +1,7 @@
 {
-  "name": "vintager",
+  "name": "vintager-stream",
   "version": "0.0.0",
-  "description": "Stream images through vintage filters.",
+  "description": "Stream images through vintage filters. Preconfigured filters and child process spawning.",
   "main": "index.js",
   "scripts": {
     "test": "node ./node_modules/.bin/mocha tests/*.test.coffee --require coffee-script/register --compilers coffee:coffee-script/register"
